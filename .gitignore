@@ -6,6 +6,9 @@ Thumbs.db*
 HELP.md
 .gradle
 build/
+gradlew.bat
+gradlew
+settings.gradle
 
 ### STS ###
 .apt_generated
