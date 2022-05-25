@@ -7,31 +7,26 @@ group 'ru.netology'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 11
+
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
-allure {
-    autoconfigure = true
-    version = '2.13.0'
-    useJUnit5 {
-        version = '2.13.0'
-    }
-}
-
 repositories {
-
     mavenCentral()
 }
 
 dependencies {
-
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-    testImplementation 'mysql:mysql-connector-java:8.0.29'
-    testImplementation 'commons-dbutils:commons-dbutils:1.7'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
     testImplementation 'com.codeborne:selenide:6.5.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+
+    testImplementation 'mysql:mysql-connector-java:8.0.29'
+    testImplementation 'org.postgresql:postgresql:42.3.5'
+    testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'io.qameta.allure:allure-selenide:2.18.0'
     testImplementation 'io.rest-assured:rest-assured:5.0.1'
-    testImplementation 'org.postgresql:postgresql:42.3.5'
+
 
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation 'org.projectlombok:lombok:1.18.22'
@@ -48,5 +43,6 @@ test {
     systemProperty 'db.user', System.getProperty('db.user', "app")
     systemProperty 'db.password', System.getProperty('db.password', "pass")
     systemProperty 'sut.url', System.getProperty('sut.url', "http://localhost:8080/")
+
 
 }
