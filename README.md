@@ -4,4 +4,7 @@ java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aq
 для postgresql
 java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar
 Запуск тестов также стоит выполнить с параметрами, указав путь к базе данных в командной строке:
-
+для mysql
+gradlew test -Ddb.url=jdbc:mysql://localhost:3306/app
+для postgresql
+gradlew test -Ddb.url=jdbc:postgresql://localhost:5432/app
