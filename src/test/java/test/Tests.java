@@ -55,5 +55,30 @@ public class Tests {
         val page3 = page1.payWithCredit();
         val page31 = page3.valueDeclined(declinedValue);
         page31.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayApprovedCardWithIncorrectValue1() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val approvedValue = DataHelper.getApprovedIncorrectValue1();
+        val page2 = page1.pay();
+        val page21 = page2.valueApproved(approvedValue);
+        page21.failedOrder();
+    }
+
+    @Test
+    public void shouldPayApprovedCardWithIncorrectValue2() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val approvedValue = DataHelper.getApprovedIncorrectValue2();
+        val page2 = page1.pay();
+        val page21 = page2.valueApproved(approvedValue);
+        page21.failedOrder();
     }
 }
