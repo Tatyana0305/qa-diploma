@@ -1,77 +1,37 @@
 package data;
 
+import lombok.Data;
 import lombok.Value;
 
+@Data
+
+
 public class DataHelper {
-    private DataHelper() {
-    }
 
     @Value
-    public static class HolderInfo {
-        String name;
-    }
-
-    public static HolderInfo getCorrectName() {
-        return new HolderInfo("Petrov Ivan");
-    }
-
-    public static HolderInfo getInCorrectName1() {
-        return new HolderInfo("Петров Иван");
-    }
-
-    public static HolderInfo getInCorrectName2() {
-        return new HolderInfo("111 1111");
-    }
-
-    public static HolderInfo getInCorrectName3() {
-        return new HolderInfo("+++ ++++");
-    }
-
-    @Value
-    public static class ValidityCard {
+    public static class ValueApproved {
+        String cardNumber;
         String month;
         String year;
+        String holder;
+        String cvc;
+    }
 
-        public static DataHelper.ValidityCard getCorrectValidity() {
-            return new DataHelper.ValidityCard("08", "22");
-        }
-
-        public static DataHelper.ValidityCard getInCorrectValidity1() {
-            return new DataHelper.ValidityCard("01", "22");
-        }
-
-        public static DataHelper.ValidityCard getInCorrectValidity2() {
-            return new DataHelper.ValidityCard("13", "22");
-        }
-
-        public static DataHelper.ValidityCard getInCorrectValidity3() {
-            return new DataHelper.ValidityCard("01", "21");
-        }
-
-        public static DataHelper.ValidityCard getInCorrectValidity4() {
-            return new DataHelper.ValidityCard("01", "11");
-        }
+    public static ValueApproved getApprovedValue() {
+        return new ValueApproved("4444 4444 4444 4441", "08", "22", "Petrov Ivan", "123");
     }
 
     @Value
-    public static class CVCCode {
+    public static class ValueDeclined {
+        String cardNumber;
+        String month;
+        String year;
+        String holder;
         String cvc;
-
-        public static DataHelper.CVCCode getCorrectCVCCode() {
-            return new DataHelper.CVCCode("123");
-        }
-
-        public static DataHelper.CVCCode getInCorrectCVCCode1() {
-            return new DataHelper.CVCCode("000");
-        }
-
-        public static DataHelper.CVCCode getInCorrectCVCCode2() {
-            return new DataHelper.CVCCode("+++");
-        }
-
-        public static DataHelper.CVCCode getInCorrectCVCCode3() {
-            return new DataHelper.CVCCode("aaa");
-        }
-
     }
+
+    public static ValueDeclined getDeclinedValue() {
+        return new ValueDeclined("4444 4444 4444 4442", "08", "22", "Petrov Ivan", "123");
+    }
+
 }
