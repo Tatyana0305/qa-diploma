@@ -95,7 +95,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue2();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -108,7 +108,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue2();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -121,7 +121,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue3();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -134,7 +134,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue3();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -173,7 +173,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue5();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.invalidDate();
 
     }
 
@@ -186,7 +186,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue5();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.invalidDate();
 
     }
 
@@ -199,7 +199,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue6();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.invalidDate();
 
     }
 
@@ -212,7 +212,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue6();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.invalidDate();
 
     }
 
@@ -225,7 +225,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue7();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -238,7 +238,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue7();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -251,7 +251,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue8();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -264,7 +264,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue8();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -277,7 +277,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue9();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.expiredData();
 
     }
 
@@ -290,7 +290,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue9();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.expiredData();
 
     }
 
@@ -303,7 +303,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue010();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -316,7 +316,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue010();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -329,7 +329,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue011();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -342,7 +342,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue011();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -433,7 +433,8 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue016();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.emptyField();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -446,7 +447,8 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue017();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.emptyField();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -459,8 +461,8 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue017();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
-
+        payWithCard.emptyField();
+        payWithCard.inCorrectFormat();
     }
 
     @Test
@@ -472,7 +474,8 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue017();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
+        payWithCredit.emptyField();
 
     }
 
@@ -485,7 +488,8 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue018();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.emptyField();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -498,7 +502,8 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue018();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.emptyField();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -511,7 +516,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue019();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -524,7 +529,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue019();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -537,7 +542,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue020();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -550,7 +555,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue020();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -563,7 +568,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue021();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
 
     }
 
@@ -576,7 +581,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue021();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
 
     }
 
@@ -589,7 +594,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue022();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.emptyField();
 
     }
 
@@ -602,7 +607,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue022();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.emptyField();
 
     }
 
@@ -615,7 +620,8 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue023();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.failedOrder();
+        payWithCard.inCorrectFormat();
+        payWithCard.emptyField();
 
     }
 
@@ -628,7 +634,8 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue023();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.failedOrder();
+        payWithCredit.inCorrectFormat();
+        payWithCredit.emptyField();
 
     }
 

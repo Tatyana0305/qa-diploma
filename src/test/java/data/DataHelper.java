@@ -82,15 +82,15 @@ public class DataHelper {
     }
 
     public static CardValue getIncorrectValue015() {
-        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "000");
+        return new CardValue("4444 4444 4444 4441", "08", "22", "Petrov Ivan", "000");
     }
 
     public static CardValue getIncorrectValue016() {
-        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "+++");
+        return new CardValue("4444 4444 4444 4441", "08", "22", "Petrov Ivan", "+++");
     }
 
     public static CardValue getIncorrectValue017() {
-        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "sss");
+        return new CardValue("4444 4444 4444 4441", "08", "22", "Petrov Ivan", "sss");
     }
 
     public static CardValue getIncorrectValue018() {
@@ -98,23 +98,23 @@ public class DataHelper {
     }
 
     public static CardValue getIncorrectValue019() {
-        return new CardValue("", "08", "22", "111 11111", "sss");
+        return new CardValue("", "08", "22", "Petrov Ivan", "123");
     }
 
     public static CardValue getIncorrectValue020() {
-        return new CardValue("4444 4444 4444 4441", "", "22", "111 11111", "sss");
+        return new CardValue("4444 4444 4444 4441", "", "22", "Petrov Ivan", "123");
     }
 
     public static CardValue getIncorrectValue021() {
-        return new CardValue("4444 4444 4444 4441", "08", "", "111 11111", "sss");
+        return new CardValue("4444 4444 4444 4441", "08", "", "Petrov Ivan", "123");
     }
 
     public static CardValue getIncorrectValue022() {
-        return new CardValue("4444 4444 4444 4441", "08", "22", "", "sss");
+        return new CardValue("4444 4444 4444 4441", "08", "22", "", "123");
     }
 
     public static CardValue getIncorrectValue023() {
-        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "");
+        return new CardValue("4444 4444 4444 4441", "08", "22", "Petrov Ivan", "");
     }
 
 }
