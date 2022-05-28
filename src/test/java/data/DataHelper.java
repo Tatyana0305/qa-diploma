@@ -1,15 +1,14 @@
 package data;
 
-import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
-@Data
-
+@NoArgsConstructor
 
 public class DataHelper {
 
     @Value
-    public static class ValueApproved {
+    public static class CardValue {
         String cardNumber;
         String month;
         String year;
@@ -17,90 +16,105 @@ public class DataHelper {
         String cvc;
     }
 
-    public static ValueApproved getApprovedValue() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "22", "Petrov Ivan", "123");
+    public static CardValue getApprovedValue() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue1() {
-        return new ValueApproved("0000 0000 0000 0000 0000", "08", "22", "Petrov Ivan", "123");
+    public static CardValue getDeclinedValue() {
+        return new CardValue("4444 4444 4444 4442", "08", "22", "Petrov Ivan", "123");
+
     }
 
-    public static ValueApproved getApprovedIncorrectValue2() {
-        return new ValueApproved("++++ ++++ ++++ ++++", "08", "22", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue1() {
+        return new CardValue("0000 0000 0000 0000 0000", "08", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue3() {
-        return new ValueApproved("ssss ssss ssss ssss", "08", "22", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue2() {
+        return new CardValue("++++ ++++ ++++ ++++", "08", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue4() {
-        return new ValueApproved("1111 1111 1111 1111", "08", "22", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue3() {
+        return new CardValue("ssss ssss ssss ssss", "08", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue5() {
-        return new ValueApproved("4444 4444 4444 4441", "13", "22", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue4() {
+        return new CardValue("1111 1111 1111 1111", "08", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue6() {
-        return new ValueApproved("4444 4444 4444 4441", "01", "22", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue5() {
+        return new CardValue("4444 4444 4444 4441", "13", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue7() {
-        return new ValueApproved("4444 4444 4444 4441", "++", "22", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue6() {
+        return new CardValue("4444 4444 4444 4441", "01", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue8() {
-        return new ValueApproved("4444 4444 4444 4441", "ss", "22", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue7() {
+        return new CardValue("4444 4444 4444 4441", "++", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue9() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "11", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue8() {
+        return new CardValue("4444 4444 4444 4441", "ss", "22", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue010() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "++", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue9() {
+        return new CardValue("4444 4444 4444 4441", "08", "11", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue011() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "ss", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue010() {
+        return new CardValue("4444 4444 4444 4441", "08", "++", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue012() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "22", "Петров Иван", "123");
+    public static CardValue getIncorrectValue011() {
+        return new CardValue("4444 4444 4444 4441", "08", "ss", "Petrov Ivan", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue013() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "22", "+++ ++++", "123");
+    public static CardValue getIncorrectValue012() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "Петров Иван", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue014() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "22", "111 11111", "123");
+    public static CardValue getIncorrectValue013() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "+++ ++++", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue015() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "22", "111 11111", "000");
+    public static CardValue getIncorrectValue014() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "123");
     }
 
-    public static ValueApproved getApprovedIncorrectValue016() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "22", "111 11111", "+++");
+    public static CardValue getIncorrectValue015() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "000");
     }
 
-    public static ValueApproved getApprovedIncorrectValue017() {
-        return new ValueApproved("4444 4444 4444 4441", "08", "22", "111 11111", "sss");
+    public static CardValue getIncorrectValue016() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "+++");
     }
 
-
-    @Value
-    public static class ValueDeclined {
-        String cardNumber;
-        String month;
-        String year;
-        String holder;
-        String cvc;
+    public static CardValue getIncorrectValue017() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "sss");
     }
 
-    public static ValueDeclined getDeclinedValue() {
-        return new ValueDeclined("4444 4444 4444 4442", "08", "22", "Petrov Ivan", "123");
+    public static CardValue getIncorrectValue018() {
+        return new CardValue("", "", "", "", "");
+    }
+
+    public static CardValue getIncorrectValue019() {
+        return new CardValue("", "08", "22", "111 11111", "sss");
+    }
+
+    public static CardValue getIncorrectValue020() {
+        return new CardValue("4444 4444 4444 4441", "", "22", "111 11111", "sss");
+    }
+
+    public static CardValue getIncorrectValue021() {
+        return new CardValue("4444 4444 4444 4441", "08", "", "111 11111", "sss");
+    }
+
+    public static CardValue getIncorrectValue022() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "", "sss");
+    }
+
+    public static CardValue getIncorrectValue023() {
+        return new CardValue("4444 4444 4444 4441", "08", "22", "111 11111", "");
     }
 
 }

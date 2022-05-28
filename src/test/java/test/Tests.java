@@ -9,6 +9,7 @@ import page.Page1;
 import static com.codeborne.selenide.Selenide.open;
 
 public class Tests {
+
     @Test
     public void shouldPayWithApprovedCard() {
         open("http://localhost:8080");
@@ -16,9 +17,10 @@ public class Tests {
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
         val approvedValue = DataHelper.getApprovedValue();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.successOrder();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(approvedValue);
+        payWithCard.successOrder();
+
     }
 
     @Test
@@ -28,9 +30,10 @@ public class Tests {
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
         val declinedValue = DataHelper.getDeclinedValue();
-        val page2 = page1.pay();
-        val page21 = page2.valueDeclined(declinedValue);
-        page21.failedOrder();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(declinedValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
@@ -40,9 +43,9 @@ public class Tests {
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
         val approvedValue = DataHelper.getApprovedValue();
-        val page3 = page1.payWithCredit();
-        val page31 = page3.valueApproved(approvedValue);
-        page31.successOrder();
+        val payWithCredit = page1.pay();
+        payWithCredit.fillCardValue(approvedValue);
+        payWithCredit.failedOrder();
     }
 
     @Test
@@ -52,415 +55,581 @@ public class Tests {
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
         val declinedValue = DataHelper.getDeclinedValue();
-        val page3 = page1.payWithCredit();
-        val page31 = page3.valueDeclined(declinedValue);
-        page31.failedOrder();
+        val payWithCredit = page1.pay();
+        payWithCredit.fillCardValue(declinedValue);
+        payWithCredit.failedOrder();
+    }
+
+    @Test
+    public void shouldPayCardWithIncorrectValue1() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue1();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
 
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue1() {
+    public void shouldPayCreditWithIncorrectValue1() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue1();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue1();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue2() {
+    public void shouldPayCardWithIncorrectValue2() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue2();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
-    }
-    @Test
-    public void shouldPayApprovedCardWithIncorrectValue3() {
-        open("http://localhost:8080");
-        Configuration.holdBrowserOpen = true;
-        Configuration.browserSize = "1908х900";
-        val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue3();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
-    }
-    @Test
-    public void shouldPayApprovedCardWithIncorrectValue4() {
-        open("http://localhost:8080");
-        Configuration.holdBrowserOpen = true;
-        Configuration.browserSize = "1908х900";
-        val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue4();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue2();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue5() {
+    public void shouldPayCreditWithIncorrectValue2() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue5();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
-    }
-    @Test
-    public void shouldPayApprovedCardWithIncorrectValue6() {
-        open("http://localhost:8080");
-        Configuration.holdBrowserOpen = true;
-        Configuration.browserSize = "1908х900";
-        val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue6();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue2();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue7() {
+    public void shouldPayCardWithIncorrectValue3() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue7();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue3();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue8() {
+    public void shouldPayCreditWithIncorrectValue3() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue8();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue3();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue9() {
+    public void shouldPayCardWithIncorrectValue4() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue9();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue4();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue010() {
+    public void shouldPayCreditWithIncorrectValue4() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue010();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue4();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue011() {
+    public void shouldPayCardWithIncorrectValue5() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue011();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue5();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue012() {
+    public void shouldPayCreditWithIncorrectValue5() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue012();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue5();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue013() {
+    public void shouldPayCardWithIncorrectValue6() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue013();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue6();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue014() {
+    public void shouldPayCreditWithIncorrectValue6() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue014();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue6();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue015() {
+    public void shouldPayCardWithIncorrectValue7() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue015();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue7();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue016() {
+    public void shouldPayCreditWithIncorrectValue7() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue016();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue7();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayApprovedCardWithIncorrectValue017() {
+    public void shouldPayCardWithIncorrectValue8() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue017();
-        val page2 = page1.pay();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue8();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue1() {
+    public void shouldPayCreditWithIncorrectValue8() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue1();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue8();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue2() {
+    public void shouldPayCardWithIncorrectValue9() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue2();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue9();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue3() {
+    public void shouldPayCreditWithIncorrectValue9() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue3();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue9();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue4() {
+    public void shouldPayCardWithIncorrectValue010() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue4();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue010();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue5() {
+    public void shouldPayCreditWithIncorrectValue010() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue5();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue010();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue6() {
+    public void shouldPayCardWithIncorrectValue011() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue6();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue011();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue7() {
+    public void shouldPayCreditWithIncorrectValue011() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue7();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue011();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue8() {
+    public void shouldPayCardWithIncorrectValue012() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue8();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue012();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue9() {
+    public void shouldPayCreditWithIncorrectValue012() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue9();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue012();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue010() {
+    public void shouldPayCardWithIncorrectValue013() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue010();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue013();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue011() {
+    public void shouldPayCreditWithIncorrectValue013() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue011();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue013();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue012() {
+    public void shouldPayCardWithIncorrectValue014() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue012();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue014();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue013() {
+    public void shouldPayCreditWithIncorrectValue015() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue013();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue015();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue014() {
+    public void shouldPayCardWithIncorrectValue016() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue014();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue016();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue015() {
+    public void shouldPayCreditWithIncorrectValue016() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue015();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue017();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue016() {
+    public void shouldPayCardWithIncorrectValue017() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue016();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue017();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
     }
 
     @Test
-    public void shouldPayWithCreditByApprovedCardWithIncorrectValue017() {
+    public void shouldPayCreditWithIncorrectValue017() {
         open("http://localhost:8080");
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1908х900";
         val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedIncorrectValue017();
-        val page2 = page1.payWithCredit();
-        val page21 = page2.valueApproved(approvedValue);
-        page21.failedOrder();
+        val incorrectValue = DataHelper.getIncorrectValue017();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCardWithIncorrectValue018() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue018();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCreditWithIncorrectValue018() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue018();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCardWithIncorrectValue019() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue019();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCreditWithIncorrectValue019() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue019();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCardWithIncorrectValue020() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue020();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCreditWithIncorrectValue020() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue020();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCardWithIncorrectValue021() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue021();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCreditWithIncorrectValue021() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue021();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCardWithIncorrectValue022() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue022();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCreditWithIncorrectValue022() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue022();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCardWithIncorrectValue023() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue023();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
+    }
+
+    @Test
+    public void shouldPayCreditWithIncorrectValue023() {
+        open("http://localhost:8080");
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1908х900";
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue023();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
     }
 
 }
