@@ -232,7 +232,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue9();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.expiredData();
+        payWithCard.invalidDate();
 
     }
 
@@ -242,7 +242,7 @@ public class Tests {
         val incorrectValue = DataHelper.getIncorrectValue9();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.expiredData();
+        payWithCredit.invalidDate();
 
     }
 
