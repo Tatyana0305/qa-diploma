@@ -4,14 +4,18 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import page.Page1;
-
-import java.sql.SQLException;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class TestsUI {
+
+    //private static final int amount = 45_000_00;
+
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
@@ -23,11 +27,15 @@ public class TestsUI {
     }
 
     @BeforeEach
-    void setUpSutUrl() throws SQLException {
+    void setUpSutUrl() {
         open(System.getProperty("sut.url"));
 
     }
 
+    //@AfterEach
+    //void setDown() {
+    //deleteAll();
+    //}
 
     @Test
     public void shouldPayWithApprovedCard() {
@@ -36,6 +44,12 @@ public class TestsUI {
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(approvedValue);
         payWithCard.successOrder();
+        //  assertEquals(amount, SQL.getAmountPayWithCard());
+        // assertEquals("APPROVED", SQL.getStatusPayWithCard());
+        //assertNotNull(SQL.getPayId());
+        //assertNotNull(SQL.getTransactionIdPayWithCard());
+        //assertEquals(SQL.getPayId(), SQL.getTransactionIdPayWithCard());
+        //assertNull(SQL.getCreditId());
 
     }
 
@@ -55,7 +69,7 @@ public class TestsUI {
         val approvedValue = DataHelper.getApprovedValue();
         val payWithCredit = page1.pay();
         payWithCredit.fillCardValue(approvedValue);
-        payWithCredit.failedOrder();
+        payWithCredit.successOrder();
     }
 
     @Test
