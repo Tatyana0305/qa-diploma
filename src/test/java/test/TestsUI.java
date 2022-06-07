@@ -352,10 +352,28 @@ public class TestsUI {
     }
 
     @Test
+    public void shouldPayCreditWithIncorrectValue014() {
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue014();
+        val payWithCard = page1.payWithCredit();
+        payWithCard.fillCardValue(incorrectValue);
+        payWithCard.failedOrder();
+
+    }
+    @Test
     public void shouldPayCreditWithIncorrectValue015() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue015();
         val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(incorrectValue);
+        payWithCredit.failedOrder();
+
+    }
+    @Test
+    public void shouldPayCardWithIncorrectValue015() {
+        val page1 = new Page1();
+        val incorrectValue = DataHelper.getIncorrectValue015();
+        val payWithCredit = page1.pay();
         payWithCredit.fillCardValue(incorrectValue);
         payWithCredit.failedOrder();
 
