@@ -2,6 +2,7 @@ package test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
+import data.SQL;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
 import org.junit.jupiter.api.AfterAll;
@@ -11,10 +12,10 @@ import org.junit.jupiter.api.Test;
 import page.Page1;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestsUI {
 
-    //private static final int amount = 45_000_00;
 
     @BeforeAll
     static void setUpAll() {
@@ -32,11 +33,6 @@ public class TestsUI {
 
     }
 
-    //@AfterEach
-    //void setDown() {
-    //deleteAll();
-    //}
-
     @Test
     public void shouldPayWithApprovedCard() {
         val page1 = new Page1();
@@ -44,12 +40,8 @@ public class TestsUI {
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(approvedValue);
         payWithCard.successOrder();
-        //  assertEquals(amount, SQL.getAmountPayWithCard());
-        // assertEquals("APPROVED", SQL.getStatusPayWithCard());
-        //assertNotNull(SQL.getPayId());
-        //assertNotNull(SQL.getTransactionIdPayWithCard());
-        //assertEquals(SQL.getPayId(), SQL.getTransactionIdPayWithCard());
-        //assertNull(SQL.getCreditId());
+        String actual = SQL.getStatusPayment();
+        assertEquals("APPROVED", actual);
 
     }
 
@@ -60,6 +52,8 @@ public class TestsUI {
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(declinedValue);
         payWithCard.failedOrder();
+        String actual = SQL.getStatusPayment();
+        assertEquals("DECLINED", actual);
 
     }
 
@@ -70,6 +64,8 @@ public class TestsUI {
         val payWithCredit = page1.pay();
         payWithCredit.fillCardValue(approvedValue);
         payWithCredit.successOrder();
+        String actual = SQL.getStatusCredit();
+        assertEquals("APPROVED", actual);
     }
 
     @Test
@@ -79,6 +75,8 @@ public class TestsUI {
         val payWithCredit = page1.pay();
         payWithCredit.fillCardValue(declinedValue);
         payWithCredit.failedOrder();
+        String actual = SQL.getStatusCredit();
+        assertEquals("DECLINED", actual);
     }
 
     @Test
@@ -360,6 +358,7 @@ public class TestsUI {
         payWithCard.failedOrder();
 
     }
+
     @Test
     public void shouldPayCreditWithIncorrectValue015() {
         val page1 = new Page1();
@@ -369,6 +368,7 @@ public class TestsUI {
         payWithCredit.failedOrder();
 
     }
+
     @Test
     public void shouldPayCardWithIncorrectValue015() {
         val page1 = new Page1();
