@@ -79,6 +79,14 @@ public class DataHelper {
         String cvc;
     }
 
+    public static CardValue validUser(String cardType) {
+        return new CardValue(
+                cardType, // карта: cardNumberApproved, cardNumberDeclined или cardNumberRandom
+                generateFutureMonth(),
+                generateFutureYear(),
+                generateHolder(),
+                generateCvc());
+    }
     public static CardValue getApprovedValue() {
         return new CardValue(getCardNumber().cardNumberApproved, generateFutureMonth(), generateFutureYear(), generateHolder(), generateCvc());
     }

@@ -1,43 +1,22 @@
 package data;
 
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
 
+import static data.DataHelper.validUser;
 import static io.restassured.RestAssured.given;
-
 
 public class Api {
 
-    public static RequestSpecification requestSpec = new RequestSpecBuilder()
-            .setBaseUri("http://localhost")
-            .setPort(8080)
-            .setAccept(ContentType.JSON)
-            .setContentType(ContentType.JSON)
-            .log(LogDetail.ALL)
-            .build();
+    private final static String baseUri = "http://localhost:8080/api/v1";
 
-    public static String PaymentPageForm (DataHelper.CardValue cardValue) {
-        return given()
-                .spec(requestSpec)
-                .body(cardValue)
+    public static void payCard(String cardType, String post, int statusCode) {
+        given()
+                .baseUri(baseUri)
+                .contentType(ContentType.JSON)
+                .body(validUser(cardType))
                 .when()
-                .post("/api/v1/pay")
+                .post(post)
                 .then()
-                .statusCode(200)
-                .extract().response().asString();
+                .statusCode(statusCode);
     }
-
-    public static String CreditRequestPageForm (DataHelper.CardValue cardValue) {
-        return given()
-                .spec(requestSpec)
-                .body(cardValue)
-                .when()
-                .post("/api/v1/credit")
-                .then()
-                .statusCode(200)
-                .extract().response().asString();
-    }
-
 }

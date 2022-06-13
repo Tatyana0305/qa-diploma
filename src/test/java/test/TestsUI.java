@@ -19,7 +19,7 @@ public class TestsUI {
 
     @BeforeAll
     static void setUpAll() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @AfterAll
@@ -40,7 +40,7 @@ public class TestsUI {
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(approvedValue);
         payWithCard.successOrder();
-        String actual = SQL.getStatusPayment();
+        String actual = SQL.getStatusPayCard();
         assertEquals("APPROVED", actual);
 
     }
@@ -52,7 +52,7 @@ public class TestsUI {
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(declinedValue);
         payWithCard.failedOrder();
-        String actual = SQL.getStatusPayment();
+        String actual = SQL.getStatusPayCard();
         assertEquals("DECLINED", actual);
 
     }
@@ -64,7 +64,7 @@ public class TestsUI {
         val payWithCredit = page1.pay();
         payWithCredit.fillCardValue(approvedValue);
         payWithCredit.successOrder();
-        String actual = SQL.getStatusCredit();
+        String actual = SQL.getStatusPayCredit();
         assertEquals("APPROVED", actual);
     }
 
@@ -75,7 +75,7 @@ public class TestsUI {
         val payWithCredit = page1.pay();
         payWithCredit.fillCardValue(declinedValue);
         payWithCredit.failedOrder();
-        String actual = SQL.getStatusCredit();
+        String actual = SQL.getStatusPayCredit();
         assertEquals("DECLINED", actual);
     }
 
