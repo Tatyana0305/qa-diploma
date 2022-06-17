@@ -27,7 +27,7 @@ public class PayWithCard {
 
 
     public void fillCardValue(DataHelper.CardValue cardValue) {
-        cardNumber.setValue(cardValue.getCardNumber());
+        cardNumber.setValue(cardValue.getNumber());
         month.setValue(cardValue.getMonth());
         year.setValue(cardValue.getYear());
         cardholder.setValue(cardValue.getHolder());

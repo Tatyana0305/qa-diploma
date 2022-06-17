@@ -72,7 +72,7 @@ public class DataHelper {
 
     @Value
     public static class CardValue {
-        String cardNumber;
+        String number;
         String month;
         String year;
         String holder;
@@ -87,6 +87,7 @@ public class DataHelper {
                 generateHolder(),
                 generateCvc());
     }
+
     public static CardValue getApprovedValue() {
         return new CardValue(getCardNumber().cardNumberApproved, generateFutureMonth(), generateFutureYear(), generateHolder(), generateCvc());
     }
@@ -186,6 +187,10 @@ public class DataHelper {
 
     public static CardValue getIncorrectValue023() {
         return new CardValue(getCardNumber().cardNumberApproved, generateFutureMonth(), generateFutureYear(), generateHolder(), "");
+    }
+
+    public static CardValue getCorrectValue024() {
+        return new CardValue(getCardNumber().cardNumberApproved, generateCurrentMonth(), generateCurrentYear(), generateHolder(), generateCvc());
     }
 
 }
