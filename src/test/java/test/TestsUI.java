@@ -45,7 +45,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате отклоненной картой")
-    public void shouldPayWithDeclinedCard() {
+    public void shouldFailureWithDeclinedCard() {
         val page1 = new Page1();
         val declinedValue = DataHelper.getDeclinedValue();
         val payWithCard = page1.pay();
@@ -70,7 +70,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате в кредит отклоненной картой")
-    public void shouldPayInCreditWithDeclinedCard() {
+    public void shouldFailureCreditWithDeclinedCard() {
         val page1 = new Page1();
         val declinedValue = DataHelper.getDeclinedValue();
         val payWithCredit = page1.pay();
@@ -81,8 +81,29 @@ public class TestsUI {
     }
 
     @Test
+    @DisplayName("Должно быть сообщение об успешной оплате с одобренной картой")
+    public void shouldPayWithApprovedCardIfCurrentMonth() {
+        val page1 = new Page1();
+        val correctValue = DataHelper.getCorrectValue024();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(correctValue);
+        payWithCard.successOrder();
+
+    }
+
+    @Test
+    @DisplayName("Должно быть сообщение об успешной оплате в кредит с одобренной картой")
+    public void shouldSuccessCreditWithApprovedCardIfCurrentMonth() {
+        val page1 = new Page1();
+        val correctValue = DataHelper.getCorrectValue024();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(correctValue);
+        payWithCredit.successOrder();
+    }
+
+    @Test
     @DisplayName("Должно быть сообщение об отказе при оплате одобренной картой если в номере карты все нули")
-    public void shouldPayCardWithIncorrectValue1() {
+    public void shouldFailurePaymentIfZeroesInCardNumber() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue1();
         val payWithCard = page1.pay();
@@ -93,7 +114,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате в кредит одобренной картой если в номере карты все нули")
-    public void shouldPayCreditWithIncorrectValue1() {
+    public void shouldFailureCreditIfZeroesInCardNumber() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue1();
         val payWithCredit = page1.payWithCredit();
@@ -104,7 +125,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой если в номере карты символы")
-    public void shouldPayCardWithIncorrectValue2() {
+    public void shouldFailurePaymentIfSymbolsInCardNumber() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue2();
         val payWithCard = page1.pay();
@@ -115,7 +136,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате в кредит одобренной картой если в номере карты символы")
-    public void shouldPayCreditWithIncorrectValue2() {
+    public void shouldFailureCreditIfSymbolsInCardNumber() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue2();
         val payWithCredit = page1.payWithCredit();
@@ -126,7 +147,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой если в номере карты буквы")
-    public void shouldPayCardWithIncorrectValue3() {
+    public void shouldFailurePaymentIfLettersInCardNumber() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue3();
         val payWithCard = page1.pay();
@@ -137,7 +158,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой в кредит если в номере карты буквы")
-    public void shouldPayCreditWithIncorrectValue3() {
+    public void shouldFailureCreditIfLettersInCardNumber() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue3();
         val payWithCredit = page1.payWithCredit();
@@ -148,7 +169,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате картой не из набора")
-    public void shouldPayCardWithIncorrectValue4() {
+    public void shouldFailurePaymentIfCardNumberOutOfBase() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue4();
         val payWithCard = page1.pay();
@@ -159,7 +180,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате в кредит картой не из набора")
-    public void shouldPayCreditWithIncorrectValue4() {
+    public void shouldFailureCreditIfCardNumberOutOfBase() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue4();
         val payWithCredit = page1.payWithCredit();
@@ -170,7 +191,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНО УКАЗАН СРОК ДЕЙСТВИЯ КАРТЫ при оплате картой если месяц = 13")
-    public void shouldPayCardWithIncorrectValue5() {
+    public void shouldFailurePaymentIfMonthOverBorder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue5();
         val payWithCard = page1.pay();
@@ -181,7 +202,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНО УКАЗАН СРОК ДЕЙСТВИЯ КАРТЫ при оплате в кредит если месяц = 13")
-    public void shouldPayCreditWithIncorrectValue5() {
+    public void shouldFailureCreditIfMonthOverBorder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue5();
         val payWithCredit = page1.payWithCredit();
@@ -192,7 +213,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНО УКАЗАН СРОК ДЕЙСТВИЯ КАРТЫ при оплате картой если месяц прошедший")
-    public void shouldPayCardWithIncorrectValue6() {
+    public void shouldFailurePaymentIfPastMonth() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue6();
         val payWithCard = page1.pay();
@@ -203,7 +224,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНО УКАЗАН СРОК ДЕЙСТВИЯ КАРТЫ при оплате в кредит если месяц прошедший")
-    public void shouldPayCreditWithIncorrectValue6() {
+    public void shouldFailureCreditIfPastMonth() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue6();
         val payWithCredit = page1.payWithCredit();
@@ -214,7 +235,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой если в поле месяц символы")
-    public void shouldPayCardWithIncorrectValue7() {
+    public void shouldFailurePaymentIfSymbolInMonth() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue7();
         val payWithCard = page1.pay();
@@ -225,7 +246,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой в кредит если в поле месяц символы")
-    public void shouldPayCreditWithIncorrectValue7() {
+    public void shouldFailureCreditIfSymbolInMonth() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue7();
         val payWithCredit = page1.payWithCredit();
@@ -236,7 +257,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой если в поле месяц буквы")
-    public void shouldPayCardWithIncorrectValue8() {
+    public void shouldFailurePaymentIfLettersInMonth() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue8();
         val payWithCard = page1.pay();
@@ -247,7 +268,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой в кредит если в поле месяц буквы")
-    public void shouldPayCreditWithIncorrectValue8() {
+    public void shouldFailureCreditIfLettersInMonth() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue8();
         val payWithCredit = page1.payWithCredit();
@@ -258,7 +279,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНО УКАЗАН СРОК ДЕЙСТВИЯ КАРТЫ при оплате картой если год прошедший")
-    public void shouldPayCardWithIncorrectValue9() {
+    public void shouldFailurePaymentIfPastYear() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue9();
         val payWithCard = page1.pay();
@@ -269,7 +290,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНО УКАЗАН СРОК ДЕЙСТВИЯ КАРТЫ при оплате в кредит если год прошедший")
-    public void shouldPayCreditWithIncorrectValue9() {
+    public void shouldFailureCreditIfPastYear() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue9();
         val payWithCredit = page1.payWithCredit();
@@ -280,7 +301,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой если в поле год символы")
-    public void shouldPayCardWithIncorrectValue010() {
+    public void shouldFailurePaymentIfSymbolsInYear() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue010();
         val payWithCard = page1.pay();
@@ -291,7 +312,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой в кредит если в поле год символы")
-    public void shouldPayCreditWithIncorrectValue010() {
+    public void shouldFailureCreditIfSymbolsInYear() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue010();
         val payWithCredit = page1.payWithCredit();
@@ -302,7 +323,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой если в поле год буквы")
-    public void shouldPayCardWithIncorrectValue011() {
+    public void shouldFailurePaymentIfLettersInYear() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue011();
         val payWithCard = page1.pay();
@@ -313,7 +334,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение НЕВЕРНЫЙ ФОРМАТ при оплате одобренной картой в кредит если в поле год буквы")
-    public void shouldPayCreditWithIncorrectValue011() {
+    public void shouldFailureCreditIfLettersInYear() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue011();
         val payWithCredit = page1.payWithCredit();
@@ -324,7 +345,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате одобренной картой если владелец заполнен латиницей")
-    public void shouldPayCardWithIncorrectValue012() {
+    public void shouldFailurePaymentIfCyrillicLettersInHolder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue012();
         val payWithCard = page1.pay();
@@ -335,7 +356,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате в кредит если владелец заполнен латиницей")
-    public void shouldPayCreditWithIncorrectValue012() {
+    public void shouldFailureCreditIfCyrillicLettersInHolder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue012();
         val payWithCredit = page1.payWithCredit();
@@ -346,7 +367,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате одобренной картой если владелец заполнен символами")
-    public void shouldPayCardWithIncorrectValue013() {
+    public void shouldFailurePaymentIfSymbolsInHolder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue013();
         val payWithCard = page1.pay();
@@ -357,7 +378,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате в кредит если владелец заполнен символами")
-    public void shouldPayCreditWithIncorrectValue013() {
+    public void shouldFailureCreditIfSymbolsInHolder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue013();
         val payWithCredit = page1.payWithCredit();
@@ -368,7 +389,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате одобренной картой если владелец заполнен цифрами")
-    public void shouldPayCardWithIncorrectValue014() {
+    public void shouldFailurePaymentIfNumbersInHolder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue014();
         val payWithCard = page1.pay();
@@ -379,7 +400,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате в кредит если владелец заполнен цифрами")
-    public void shouldPayCreditWithIncorrectValue014() {
+    public void shouldFailureCreditIfNumbersInHolder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue014();
         val payWithCard = page1.payWithCredit();
@@ -390,7 +411,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате одобренной картой если CVC = 000")
-    public void shouldPayCreditWithIncorrectValue015() {
+    public void shouldFailurePaymentIfZeroesInCVC() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue015();
         val payWithCredit = page1.payWithCredit();
@@ -401,7 +422,7 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате в кредит если CVC = 000")
-    public void shouldPayCardWithIncorrectValue015() {
+    public void shouldFailureCreditIfZeroesInCVC() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue015();
         val payWithCredit = page1.pay();
@@ -411,50 +432,51 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCardWithIncorrectValue016() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате картой если CVC = +++")
+    public void shouldFailurePaymentIfSymbolsInCVC() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue016();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.emptyField();
         payWithCard.inCorrectFormat();
 
     }
 
     @Test
-    public void shouldPayCreditWithIncorrectValue016() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате в кредит если CVC = +++")
+    public void shouldFailureCreditIfSymbolsInCVC() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue016();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
-        payWithCredit.emptyField();
         payWithCredit.inCorrectFormat();
 
     }
 
     @Test
-    public void shouldPayCardWithIncorrectValue017() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате картой если CVC заполнено буквами")
+    public void shouldFailurePaymentIfLettersInCVC() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue017();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(incorrectValue);
-        payWithCard.emptyField();
         payWithCard.inCorrectFormat();
     }
 
     @Test
-    public void shouldPayCreditWithIncorrectValue017() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате в кредит если CVC заполнено буквами")
+    public void shouldFailureCreditIfLettersInCVC() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue017();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
         payWithCredit.inCorrectFormat();
-        payWithCredit.emptyField();
 
     }
 
     @Test
-    public void shouldPayCardWithIncorrectValue018() {
+    @DisplayName("Должны быть сообщения НЕКОРРЕКТНЫЙ ФОРМАТ и ПОЛЕ ОБЯЗАТЕЛЬНО ДЛЯ ЗАПОЛНЕНИЯ при оплате картой если все поля пустые")
+    public void shouldFailurePaymentIfEmptyAllFields() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue018();
         val payWithCard = page1.pay();
@@ -465,7 +487,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCreditWithIncorrectValue018() {
+    @DisplayName("Должны быть сообщения НЕКОРРЕКТНЫЙ ФОРМАТ и ПОЛЕ ОБЯЗАТЕЛЬНО ДЛЯ ЗАПОЛНЕНИЯ при оплате в кредит если если все поля пустые")
+    public void shouldFailureCreditIfEmptyAllFields() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue018();
         val payWithCredit = page1.payWithCredit();
@@ -476,7 +499,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCardWithIncorrectValue019() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате картой если номер карты пустой")
+    public void shouldFailurePaymentIfEmptyCardNumber() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue019();
         val payWithCard = page1.pay();
@@ -486,7 +510,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCreditWithIncorrectValue019() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате в кредит если если номер карты пустой")
+    public void shouldFailureCreditIfEmptyCardNumber() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue019();
         val payWithCredit = page1.payWithCredit();
@@ -496,7 +521,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCardWithIncorrectValue020() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате картой если поле месяц пустое")
+    public void shouldFailurePaymentIfEmptyMonth() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue020();
         val payWithCard = page1.pay();
@@ -506,7 +532,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCreditWithIncorrectValue020() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате в кредит если поле месяц пустое")
+    public void shouldFailureCreditIfEmptyMonth() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue020();
         val payWithCredit = page1.payWithCredit();
@@ -516,7 +543,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCardWithIncorrectValue021() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате картой если поле год пустое")
+    public void shouldFailurePaymentIfEmptyYear() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue021();
         val payWithCard = page1.pay();
@@ -526,7 +554,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCreditWithIncorrectValue021() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ при оплате в кредит если поле год пустое")
+    public void shouldFailureCreditIfEmptyYear() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue021();
         val payWithCredit = page1.payWithCredit();
@@ -536,7 +565,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCardWithIncorrectValue022() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ и ПОЛЕ ОБЯЗАТЕЛЬНО ДЛЯ ЗАПОЛНЕНИЯ при оплате картой если поле владелец пустое")
+    public void shouldFailurePaymentIfEmptyHolder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue022();
         val payWithCard = page1.pay();
@@ -546,7 +576,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCreditWithIncorrectValue022() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ и ПОЛЕ ОБЯЗАТЕЛЬНО ДЛЯ ЗАПОЛНЕНИЯ при оплате в кредит если поле владелец пустое")
+    public void shouldFailureCreditIfEmptyHolder() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue022();
         val payWithCredit = page1.payWithCredit();
@@ -556,7 +587,8 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCardWithIncorrectValue023() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ и ПОЛЕ ОБЯЗАТЕЛЬНО ДЛЯ ЗАПОЛНЕНИЯ при оплате картой если поле CVC пустое")
+    public void shouldFailurePaymentIfEmptyCVC() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue023();
         val payWithCard = page1.pay();
@@ -567,33 +599,14 @@ public class TestsUI {
     }
 
     @Test
-    public void shouldPayCreditWithIncorrectValue023() {
+    @DisplayName("Должно быть сообщение НЕКОРРЕКТНЫЙ ФОРМАТ и ПОЛЕ ОБЯЗАТЕЛЬНО ДЛЯ ЗАПОЛНЕНИЯ при оплате в кредит если поле CVC пустое")
+    public void shouldFailureCreditIfEmptyCVC() {
         val page1 = new Page1();
         val incorrectValue = DataHelper.getIncorrectValue023();
         val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(incorrectValue);
         payWithCredit.inCorrectFormat();
         payWithCredit.emptyField();
-
-    }
-
-    @Test
-    public void shouldPayCardWithCorrectValue024() {
-        val page1 = new Page1();
-        val correctValue = DataHelper.getCorrectValue024();
-        val payWithCard = page1.pay();
-        payWithCard.fillCardValue(correctValue);
-        payWithCard.successOrder();
-
-    }
-
-    @Test
-    public void shouldPayCreditWithCorrectValue024() {
-        val page1 = new Page1();
-        val correctValue = DataHelper.getCorrectValue024();
-        val payWithCredit = page1.payWithCredit();
-        payWithCredit.fillCardValue(correctValue);
-        payWithCredit.successOrder();
 
     }
 
