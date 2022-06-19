@@ -6,8 +6,7 @@ import data.DataHelper;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -35,7 +34,6 @@ public class PayWithCard {
 
         continueButton.click();
     }
-
 
     public void successOrder() {
         $(withText("Операция одобрена Банком.")).shouldBe(Condition.visible, Duration.ofSeconds(15));

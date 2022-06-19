@@ -12,100 +12,29 @@ public class SQL {
     private static String user = System.getProperty("db.user");
     private static String password = System.getProperty("db.password");
 
-
     @SneakyThrows
-    public static Integer getAmountDebitCard() {
+    public static String getStatus(String status) {
         QueryRunner runner = new QueryRunner();
         try (
                 Connection conn = DriverManager.getConnection(
                         url, user, password);
         ) {
-            return runner.query(conn, "SELECT amount FROM payment_entity " +
-                            "ORDER BY created DESC",
-                    new ScalarHandler<>());
+            String result = runner.query(conn, status, new ScalarHandler<>());
+            System.out.println(result);
+            return result;
         }
     }
 
     @SneakyThrows
-    public static String getStatusPayCard() {
-        QueryRunner runner = new QueryRunner();
-        try (
-                Connection conn = DriverManager.getConnection(
-                        url, user, password);
-        ) {
-            return runner.query(conn, "SELECT status FROM payment_entity " +
-                            "ORDER BY created DESC",
-                    new ScalarHandler<>());
-        }
-    }
-
-
-    @SneakyThrows
-    public static String getStatusPayCredit() {
-        QueryRunner runner = new QueryRunner();
-        try (
-                Connection conn = DriverManager.getConnection(
-                        url, user, password);
-        ) {
-            return runner.query(conn, "SELECT status FROM credit_request_entity " +
-                            "ORDER BY created DESC",
-                    new ScalarHandler<>());
-        }
-
+    public static String getStatusPayment() {
+        String statusSQL = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
+        return getStatus(statusSQL);
     }
 
     @SneakyThrows
-    public static String getTransactionIdPayCard() {
-        QueryRunner runner = new QueryRunner();
-        try (
-                Connection conn = DriverManager.getConnection(
-                        url, user, password);
-        ) {
-            return runner.query(conn, "select transaction_id from payment_entity pe " +
-                            "order by created desc",
-                    new ScalarHandler<>());
-        }
-    }
-
-
-    @SneakyThrows
-    public static String getBankIdCreditCard() {
-        QueryRunner runner = new QueryRunner();
-        try (
-                Connection conn = DriverManager.getConnection(
-                        url, user, password);
-        ) {
-
-            return runner.query(conn, "select bank_id from credit_request_entity cre " +
-                            "order by created desc",
-                    new ScalarHandler<>());
-        }
-    }
-
-    @SneakyThrows
-    public static String getCreditId() {
-        QueryRunner runner = new QueryRunner();
-        try (
-                Connection conn = DriverManager.getConnection(
-                        url, user, password);
-        ) {
-            return runner.query(conn, "select credit_id from order_entity oe " +
-                            "order by created desc",
-                    new ScalarHandler<>());
-        }
-    }
-
-    @SneakyThrows
-    public static String getPaymentId() {
-        QueryRunner runner = new QueryRunner();
-        try (
-                Connection conn = DriverManager.getConnection(
-                        url, user, password);
-        ) {
-            return runner.query(conn, "select payment_id from order_entity oe " +
-                            "order by created desc",
-                    new ScalarHandler<>());
-        }
+    public static String getStatusCredit() {
+        String statusSQL = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
+        return getStatus(statusSQL);
     }
 
     @SneakyThrows

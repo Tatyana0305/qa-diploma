@@ -58,5 +58,5 @@ public class PayWithCredit {
         $(withText("Неверно указан срок действия карты")).shouldBe(visible);
     }
 
-    }
+}
 

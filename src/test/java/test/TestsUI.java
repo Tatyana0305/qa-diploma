@@ -9,10 +9,9 @@ import org.junit.jupiter.api.*;
 import page.Page1;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestsUI {
-
 
     @BeforeAll
     static void setUpAll() {
@@ -32,14 +31,25 @@ public class TestsUI {
 
     @Test
     @DisplayName("Должно быть сообщение об успешной оплате с одобренной картой")
-    public void shouldPayWithApprovedCard() {
+    void shouldSuccessPayWithApprovedDebitCard() {
         val page1 = new Page1();
         val approvedValue = DataHelper.getApprovedValue();
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(approvedValue);
         payWithCard.successOrder();
-        String actual = SQL.getStatusPayCard();
+        String actual = SQL.getStatusPayment();
         assertEquals("APPROVED", actual);
+    }
+
+    @Test
+    @DisplayName("Должно быть сообщение об успешной оплате в кредит с одобренной картой")
+    public void shouldPayInCreditWithApprovedCard() {
+        val page1 = new Page1();
+        val approvedValue = DataHelper.getApprovedValue();
+        val payWithCredit = page1.pay();
+        payWithCredit.fillCardValue(approvedValue);
+        payWithCredit.successOrder();
+        assertEquals("APPROVED", SQL.getStatusCredit());
 
     }
 
@@ -51,21 +61,9 @@ public class TestsUI {
         val payWithCard = page1.pay();
         payWithCard.fillCardValue(declinedValue);
         payWithCard.failedOrder();
-        String actual = SQL.getStatusPayCard();
-        assertEquals("DECLINED", actual);
+        assertEquals("DECLINED", SQL.getStatusPayment());
 
-    }
 
-    @Test
-    @DisplayName("Должно быть сообщение об успешной оплате в кредит с одобренной картой")
-    public void shouldPayInCreditWithApprovedCard() {
-        val page1 = new Page1();
-        val approvedValue = DataHelper.getApprovedValue();
-        val payWithCredit = page1.pay();
-        payWithCredit.fillCardValue(approvedValue);
-        payWithCredit.successOrder();
-        String actual = SQL.getStatusPayCredit();
-        assertEquals("APPROVED", actual);
     }
 
     @Test
@@ -76,30 +74,11 @@ public class TestsUI {
         val payWithCredit = page1.pay();
         payWithCredit.fillCardValue(declinedValue);
         payWithCredit.failedOrder();
-        String actual = SQL.getStatusPayCredit();
-        assertEquals("DECLINED", actual);
+        assertEquals("DECLINED", SQL.getStatusPayment());
     }
 
-    @Test
-    @DisplayName("Должно быть сообщение об успешной оплате с одобренной картой")
-    public void shouldPayWithApprovedCardIfCurrentMonth() {
-        val page1 = new Page1();
-        val correctValue = DataHelper.getCorrectValue024();
-        val payWithCard = page1.pay();
-        payWithCard.fillCardValue(correctValue);
-        payWithCard.successOrder();
 
-    }
-
-    @Test
-    @DisplayName("Должно быть сообщение об успешной оплате в кредит с одобренной картой")
-    public void shouldSuccessCreditWithApprovedCardIfCurrentMonth() {
-        val page1 = new Page1();
-        val correctValue = DataHelper.getCorrectValue024();
-        val payWithCredit = page1.payWithCredit();
-        payWithCredit.fillCardValue(correctValue);
-        payWithCredit.successOrder();
-    }
+    //
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате одобренной картой если в номере карты все нули")
@@ -609,5 +588,28 @@ public class TestsUI {
         payWithCredit.emptyField();
 
     }
+
+    @Test
+    @DisplayName("Должно быть сообщение об успешной оплате с одобренной картой если месяц текущий, а год будущий")
+    public void shouldPayWithApprovedCardIfCurrentMonth() {
+        val page1 = new Page1();
+        val correctValue = DataHelper.getCorrectValue024();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(correctValue);
+        payWithCard.successOrder();
+
+    }
+
+    @Test
+    @DisplayName("Должно быть сообщение об успешной оплате в кредит с одобренной картой если месяц текущий, а год будущий")
+    public void shouldSuccessCreditWithApprovedCardIfCurrentMonth() {
+        val page1 = new Page1();
+        val correctValue = DataHelper.getCorrectValue024();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(correctValue);
+        payWithCredit.successOrder();
+
+    }
+
 
 }
