@@ -26,9 +26,8 @@ public class TestsUI {
     @BeforeEach
     void setUpSutUrl() {
         open(System.getProperty("sut.url"));
-
     }
-
+//тесты с корректными данными
     @Test
     @DisplayName("Должно быть сообщение об успешной оплате с одобренной картой")
     void shouldSuccessPayWithApprovedDebitCard() {
@@ -46,7 +45,7 @@ public class TestsUI {
     public void shouldPayInCreditWithApprovedCard() {
         val page1 = new Page1();
         val approvedValue = DataHelper.getApprovedValue();
-        val payWithCredit = page1.pay();
+        val payWithCredit = page1.payWithCredit();
         payWithCredit.fillCardValue(approvedValue);
         payWithCredit.successOrder();
         assertEquals("APPROVED", SQL.getStatusCredit());
@@ -77,8 +76,29 @@ public class TestsUI {
         assertEquals("DECLINED", SQL.getStatusPayment());
     }
 
+    @Test
+    @DisplayName("Должно быть сообщение об успешной оплате с одобренной картой если месяц текущий, а год будущий")
+    public void shouldPayWithApprovedCardIfCurrentMonth() {
+        val page1 = new Page1();
+        val correctValue = DataHelper.getCorrectValue024();
+        val payWithCard = page1.pay();
+        payWithCard.fillCardValue(correctValue);
+        payWithCard.successOrder();
 
-    //
+    }
+
+    @Test
+    @DisplayName("Должно быть сообщение об успешной оплате в кредит с одобренной картой если месяц текущий, а год будущий")
+    public void shouldSuccessCreditWithApprovedCardIfCurrentMonth() {
+        val page1 = new Page1();
+        val correctValue = DataHelper.getCorrectValue024();
+        val payWithCredit = page1.payWithCredit();
+        payWithCredit.fillCardValue(correctValue);
+        payWithCredit.successOrder();
+
+    }
+
+    //тесты с некорректными данными
 
     @Test
     @DisplayName("Должно быть сообщение об отказе при оплате одобренной картой если в номере карты все нули")
@@ -586,28 +606,6 @@ public class TestsUI {
         payWithCredit.fillCardValue(incorrectValue);
         payWithCredit.inCorrectFormat();
         payWithCredit.emptyField();
-
-    }
-
-    @Test
-    @DisplayName("Должно быть сообщение об успешной оплате с одобренной картой если месяц текущий, а год будущий")
-    public void shouldPayWithApprovedCardIfCurrentMonth() {
-        val page1 = new Page1();
-        val correctValue = DataHelper.getCorrectValue024();
-        val payWithCard = page1.pay();
-        payWithCard.fillCardValue(correctValue);
-        payWithCard.successOrder();
-
-    }
-
-    @Test
-    @DisplayName("Должно быть сообщение об успешной оплате в кредит с одобренной картой если месяц текущий, а год будущий")
-    public void shouldSuccessCreditWithApprovedCardIfCurrentMonth() {
-        val page1 = new Page1();
-        val correctValue = DataHelper.getCorrectValue024();
-        val payWithCredit = page1.payWithCredit();
-        payWithCredit.fillCardValue(correctValue);
-        payWithCredit.successOrder();
 
     }
 
